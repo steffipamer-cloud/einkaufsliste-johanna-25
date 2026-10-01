@@ -1,11 +1,11 @@
 {
-  "name": "Niiiii & Spompi Einkaufsliste",
+  "name": "Johanna25 Einkaufsliste",
   "short_name": "Einkaufsliste",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
+  "background_color": "#0000C8",
+  "theme_color": "#FF55A5",
   "description": "Gemeinsame Einkaufsliste",
   "icons": [
     {
