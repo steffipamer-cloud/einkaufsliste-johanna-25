@@ -1,492 +1,434 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>💖 Niiiii & Spompi 💙</title>
+    <title>niii & spompis einkaufsliste</title>
 
-<link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.json">
 
-<link href="https://fonts.googleapismily=Baloo+2:wght@400;500;600;700&display=swap
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-<meta name="theme-color" content="#FF61D2">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#1A00B8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-<style>
+    <style>
+        :root{
+            --blue:#1A00B8;
+            --pink:#FFD1EF;
+            --card:#FFF5FC;
+        }
 
-*{
-    box-sizing:border-box;
-    font-family:'Baloo 2', cursive;
-}
+        *{
+            box-sizing:border-box;
+            font-family:'Nunito', sans-serif;
+        }
 
-body{
-    margin:0;
-    padding:20px;
+        body{
+            margin:0;
+            padding:20px;
+            min-height:100vh;
+            background:var(--blue);
+            color:var(--pink);
+        }
 
-    min-height:100vh;
+        .container{
+            max-width:700px;
+            margin:auto;
+        }
 
-    background:linear-gradient(
-        135deg,
-        #FF61D2 0%,
-        #ff8ae2 100%
-    );
+        h1{
+            font-size:2.6rem;
+            font-weight:800;
+            text-align:center;
+            color:var(--pink);
+            margin-bottom:5px;
+        }
 
-    color:#1A00B8;
-}
+        .subtitle{
+            text-align:center;
+            font-size:1.2rem;
+            font-weight:600;
+            color:var(--pink);
+            margin-bottom:20px;
+        }
 
-.container{
-    max-width:700px;
-    margin:auto;
-}
+        .card{
+            background:var(--card);
+            border-radius:22px;
+            padding:16px;
+            margin-bottom:16px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.15);
+            color:var(--blue);
+        }
 
-h1{
-    font-size:2.6rem;
-    text-align:center;
-    color:#1A00B8;
+        .user{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+            gap:12px;
+        }
 
-    margin-bottom:5px;
+        .input-area{
+            display:flex;
+            gap:10px;
+        }
 
-    text-shadow:
-        0 2px 10px rgba(255,255,255,0.4);
-}
+        input{
+            flex:1;
+            min-width:0;
+            padding:14px;
+            font-size:18px;
+            border-radius:10px;
+            border:2px solid var(--blue);
+            color:var(--blue);
+            background:white;
+        }
 
-.subtitle{
-    text-align:center;
-    font-size:1.2rem;
-    font-weight:600;
+        input::placeholder{
+            color:#7d6fd1;
+        }
 
-    margin-bottom:20px;
-}
+        input:focus-visible{
+            outline:3px solid var(--pink);
+            outline-offset:2px;
+        }
 
-.card{
-    background:rgba(255,255,255,0.88);
+        button{
+            border:none;
+            border-radius:16px;
+            cursor:pointer;
+            font-size:16px;
+            font-weight:700;
+            transition:transform 0.2s;
+        }
 
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
+        button:hover{
+            transform:scale(1.04);
+        }
 
-    border-radius:22px;
+        button:focus-visible{
+            outline:3px solid var(--blue);
+            outline-offset:3px;
+        }
 
-    padding:16px;
+        .add-btn{
+            flex:0 0 65px;
+            background:var(--blue);
+            color:var(--pink);
+            font-size:30px;
+        }
 
-    margin-bottom:16px;
+        .change-btn{
+            background:var(--blue);
+            color:var(--pink);
+            padding:10px 16px;
+        }
 
-    box-shadow:
-        0 10px 25px rgba(26,0,184,0.12);
+        .delete-btn{
+            flex-shrink:0;
+            background:var(--pink);
+            color:var(--blue);
+            padding:12px 14px;
+            font-size:18px;
+        }
 
-    color:#1A00B8;
-}
+        .item{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:10px;
+        }
 
-.user{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+        .item-content{
+            cursor:pointer;
+            flex:1;
+            min-width:0;
+            padding:0;
+            background:transparent;
+            color:var(--blue);
+            text-align:left;
+            font-weight:400;
+        }
 
-.input-area{
-    display:flex;
-    gap:10px;
-}
+        .item-content:hover{
+            transform:none;
+        }
 
-input{
-    flex:1;
+        .item-text{
+            display:block;
+            font-size:22px;
+            overflow-wrap:anywhere;
+        }
 
-    padding:14px;
+        .checked{
+            text-decoration:line-through;
+            opacity:0.55;
+        }
 
-    font-size:18px;
+        .meta{
+            display:block;
+            font-size:13px;
+            margin-top:4px;
+        }
 
-    border-radius:16px;
+        @media(max-width:420px){
+            body{
+                padding:14px;
+            }
 
-    border:2px solid #1A00B8;
+            h1{
+                font-size:2rem;
+            }
 
-    color:#1A00B8;
+            .card{
+                padding:14px;
+            }
 
-    background:white;
-}
+            input{
+                padding:12px;
+                font-size:16px;
+            }
 
-input::placeholder{
-    color:#7d6fd1;
-}
-
-button{
-    border:none;
-
-    border-radius:16px;
-
-    cursor:pointer;
-
-    font-size:16px;
-
-    font-weight:700;
-
-    transition:0.2s;
-}
-
-button:hover{
-    transform:scale(1.04);
-}
-
-.add-btn{
-    width:65px;
-
-    background:#1A00B8;
-
-    color:white;
-
-    font-size:30px;
-}
-
-.change-btn{
-    background:#1A00B8;
-    color:white;
-
-    padding:10px 16px;
-}
-
-.delete-btn{
-    background:#ff4d5e;
-
-    color:white;
-
-    padding:12px 14px;
-
-    font-size:18px;
-}
-
-.item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-}
-
-.item-content{
-    cursor:pointer;
-    flex:1;
-}
-
-.item-text{
-    font-size:22px;
-}
-
-.checked{
-    text-decoration:line-through;
-    opacity:0.55;
-}
-
-.meta{
-    font-size:13px;
-    margin-top:4px;
-}
-
-</style>
+            .add-btn{
+                flex-basis:52px;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="container">
 
-<div class="container">
+        <h1> Niii & Spompi's</h1>
 
-    <h1>💖 Niiiii & Spompi 💙</h1>
-
-    <div class="subtitle">
-        🛒 Unsere Einkaufsliste
-    </div>
-
-    <div class="card user">
-
-        <div>
-            <strong>Du bist:</strong>
-            <span id="username"></span>
+        <div class="subtitle">
+             Einkaufsliste 🌶️🥨 
         </div>
 
-        <button
-            class="change-btn"
-            onclick="changeUser()">
-            Wechseln
-        </button>
-
-    </div>
-
-    <div class="card">
-
-        <div class="input-area">
-
-            <input
-                id="itemInput"
-                placeholder="Artikel hinzufügen..."
-            >
+        <div class="card user">
+            <div>
+                <strong>Ich bin:</strong>
+                <span id="username"></span>
+            </div>
 
             <button
-                class="add-btn"
-                onclick="addItem()">
-                +
+                type="button"
+                class="change-btn"
+                onclick="changeUser()">
+                wechseln
             </button>
-
         </div>
+
+        <div class="card">
+            <div class="input-area">
+                <input
+                    id="itemInput"
+                    type="text"
+                    placeholder="Artikel hinzufügen..."
+                    aria-label="Artikel hinzufügen"
+                >
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addItem()"
+                    aria-label="Artikel hinzufügen">
+                    +
+                </button>
+            </div>
+        </div>
+
+        <div id="list"></div>
 
     </div>
 
-    <div id="list"></div>
+    <script type="module">
+        import { initializeApp }
+        from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 
-</div>
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            deleteDoc,
+            updateDoc,
+            doc,
+            query,
+            orderBy,
+            onSnapshot,
+            serverTimestamp
+        }
+        from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-<script type="module">
+        const firebaseConfig = {
+            apiKey: "AIzaSyCvuRjWFyhh0k_wjbyZp3RDK5yC4dpbGdU",
+            authDomain: "einkaufsliste-johanna25.firebaseapp.com",
+            projectId: "einkaufsliste-johanna25",
+            storageBucket: "einkaufsliste-johanna25.firebasestorage.app",
+            messagingSenderId: "628461116369",
+            appId: "1:628461116369:web:830aa4526d8cb24fd61ef0"
+        };
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-import {
-    getFirestore,
-    collection,
-    addDoc,
-    deleteDoc,
-    updateDoc,
-    doc,
-    query,
-    orderBy,
-    onSnapshot,
-    serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("./sw.js").catch((error) => {
+                console.error("Service Worker konnte nicht geladen werden:", error);
+            });
+        }
 
-const firebaseConfig = {
+        let user = localStorage.getItem("shoppingUser");
 
-  apiKey: "AIzaSyCvuRjWFyhh0k_wjbyZp3RDK5yC4dpbGdU",
-
-  authDomain:
-  "einkaufsliste-johanna25.firebaseapp.com",
-
-  projectId:
-  "einkaufsliste-johanna25",
-
-  storageBucket:
-  "einkaufsliste-johanna25.firebasestorage.app",
-
-  messagingSenderId:
-  "628461116369",
-
-  appId:
-  "1:628461116369:web:830aa4526d8cb24fd61ef0"
-
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-if ("serviceWorker" in navigator) {
-
-    window.addEventListener("load", () => {
-
-        navigator.serviceWorker.register("./sw.js");
-
-    });
-
-}
-
-let user = localStorage.getItem("shoppingUser");
-
-if(!user){
-
-    const answer = prompt(
+        function selectUser() {
+            const answer = prompt(
 `Wer bist du?
 
-1 = Niiiii
+1 = Niii
 2 = Spompi`
-    );
+            );
 
-    user =
-    answer === "2"
-    ? "Spompi"
-    : "Niiiii";
-
-    localStorage.setItem(
-        "shoppingUser",
-        user
-    );
-}
-
-document.getElementById(
-    "username"
-).textContent = user;
-
-window.changeUser = function(){
-
-    const answer = prompt(
-`Wer bist du?
-
-1 = Niiiii
-2 = Spompi`
-    );
-
-    user =
-    answer === "2"
-    ? "Spompi"
-    : "Niiiii";
-
-    localStorage.setItem(
-        "shoppingUser",
-        user
-    );
-
-    document.getElementById(
-        "username"
-    ).textContent = user;
-
-};
-
-const shoppingCollection =
-collection(
-    db,
-    "shopping"
-);
-
-window.addItem = async function(){
-
-    const input =
-    document.getElementById(
-        "itemInput"
-    );
-
-    const text =
-    input.value.trim();
-
-    if(!text){
-        return;
-    }
-
-    await addDoc(
-        shoppingCollection,
-        {
-            text:text,
-            creator:user,
-            checked:false,
-            createdAt:
-            serverTimestamp()
+            return answer === "2" ? "Spompi" : "Niii";
         }
-    );
 
-    input.value = "";
-};
-
-window.toggleItem =
-async function(id,current){
-
-    await updateDoc(
-        doc(
-            db,
-            "shopping",
-            id
-        ),
-        {
-            checked:!current
+        if (!user) {
+            user = selectUser();
+            localStorage.setItem("shoppingUser", user);
         }
-    );
-};
 
-window.deleteItem =
-async function(id){
+        document.getElementById("username").textContent = user;
 
-    if(
-        !confirm(
-            "Artikel löschen?"
-        )
-    ){
-        return;
-    }
+        window.changeUser = function() {
+            user = selectUser();
+            localStorage.setItem("shoppingUser", user);
+            document.getElementById("username").textContent = user;
+        };
 
-    await deleteDoc(
-        doc(
-            db,
-            "shopping",
-            id
-        )
-    );
-};
+        const shoppingCollection = collection(db, "shopping");
 
-const q = query(
-    shoppingCollection,
-    orderBy(
-        "createdAt",
-        "asc"
-    )
-);
+        let addingItem = false;
 
-onSnapshot(
-q,
-(snapshot)=>{
+        window.addItem = async function() {
+            const input = document.getElementById("itemInput");
+            const text = input.value.trim();
 
-    const list =
-    document.getElementById(
-        "list"
-    );
+            if (!text || addingItem) {
+                return;
+            }
 
-    list.innerHTML = "";
+            addingItem = true;
 
-    snapshot.forEach(
-    (entry)=>{
+            try {
+                await addDoc(shoppingCollection, {
+                    text: text,
+                    creator: user,
+                    checked: false,
+                    createdAt: serverTimestamp()
+                });
 
-        const item =
-        entry.data();
+                if (input.value.trim() === text) {
+                    input.value = "";
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Der Artikel konnte nicht gespeichert werden. Bitte versuche es noch einmal.");
+            } finally {
+                addingItem = false;
+            }
+        };
 
-        const div =
-        document.createElement(
-            "div"
+        window.toggleItem = async function(id, current) {
+            try {
+                await updateDoc(doc(db, "shopping", id), {
+                    checked: !current
+                });
+            } catch (error) {
+                console.error(error);
+                alert("Der Artikel konnte nicht aktualisiert werden.");
+            }
+        };
+
+        window.deleteItem = async function(id) {
+            if (!confirm("Artikel löschen?")) {
+                return;
+            }
+
+            try {
+                await deleteDoc(doc(db, "shopping", id));
+            } catch (error) {
+                console.error(error);
+                alert("Der Artikel konnte nicht gelöscht werden.");
+            }
+        };
+
+        const q = query(
+            shoppingCollection,
+            orderBy("createdAt", "asc")
         );
 
-        div.className =
-        "card";
+        onSnapshot(q, (snapshot) => {
+            const list = document.getElementById("list");
+            list.replaceChildren();
 
-        div.innerHTML = `
+            snapshot.forEach((entry) => {
+                const item = entry.data();
 
-            <div class="item">
+                const card = document.createElement("div");
+                card.className = "card";
 
-                <div
-                    class="item-content"
-                    onclick="toggleItem('${entry.id}', ${item.checked})">
+                const row = document.createElement("div");
+                row.className = "item";
 
-                    <div class="item-text ${item.checked ? 'checked' : ''}">
-                        ${item.checked ? '✅' : '⬜'} ${item.text}
-                    </div>
+                const content = document.createElement("button");
+                content.type = "button";
+                content.className = "item-content";
+                content.setAttribute("aria-pressed", String(Boolean(item.checked)));
+                content.addEventListener("click", () => {
+                    window.toggleItem(entry.id, Boolean(item.checked));
+                });
 
-                    <div class="meta">
-                        eingetragen von ${item.creator}
-                    </div>
+                const text = document.createElement("span");
+                text.className = "item-text" + (item.checked ? " checked" : "");
+                text.textContent = `${item.checked ? "✅" : "⬜"} ${item.text}`;
 
-                </div>
+                const meta = document.createElement("span");
+                meta.className = "meta";
+                meta.textContent = `eingetragen von ${item.creator}`;
 
-                <button
-                    class="delete-btn"
-                    onclick="deleteItem('${entry.id}')">
-                    🗑️
-                </button>
+                const deleteButton = document.createElement("button");
+                deleteButton.type = "button";
+                deleteButton.className = "delete-btn";
+                deleteButton.textContent = "🗑️";
+                deleteButton.setAttribute("aria-label", `${item.text} löschen`);
+                deleteButton.addEventListener("click", () => {
+                    window.deleteItem(entry.id);
+                });
 
-            </div>
-        `;
+                content.append(text, meta);
+                row.append(content, deleteButton);
+                card.append(row);
+                list.append(card);
+            });
+        }, (error) => {
+            console.error(error);
+            document.getElementById("list").textContent =
+                "Die Einkaufsliste konnte nicht geladen werden. Bitte lade die Seite erneut.";
+        });
 
-        list.appendChild(div);
-
-    });
-
-});
-
-document
-.getElementById(
-    "itemInput"
-)
-.addEventListener(
-"keydown",
-(e)=>{
-
-    if(
-        e.key === "Enter"
-    ){
-        addItem();
-    }
-
-});
-
-</script>
-
+        document.getElementById("itemInput").addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                window.addItem();
+            }
+        });
+    </script>
 </body>
 </html>
